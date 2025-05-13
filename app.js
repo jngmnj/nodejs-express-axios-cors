@@ -10,8 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   fetchButton.addEventListener('click', async () => {
     try {
       const response = await axios.get('http://localhost:3000');
-      const data = await response.data;
-      messageDisplay.textContent = data.message || '메시지가 없습니다';
+      messageDisplay.textContent = response.data.message || '메시지가 없습니다';
     } catch (error) {
       console.error('메시지 가져오기 오류:', error);
     }
@@ -27,8 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'Content-Type': 'text/plain',
           },
         });
-        const data = await response.data;
-        messageDisplay.textContent = data;
+        messageDisplay.textContent = response.data;
       } catch (error) {
         console.error('메시지 업데이트 오류:', error);
       }
@@ -38,9 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // 서버에 메시지 삭제 요청 보내기
   deleteButton.addEventListener('click', async () => {
     try {
-      const response = await axios.delete('http://localhost:3000', { data: null });
-      const data = await response.data;;
-      messageDisplay.textContent = data;
+      // const response = await axios.delete('http://localhost:3000', { data: null });
+      const response = await axios.delete('http://localhost:3000');
+      messageDisplay.textContent = response.data;
     } catch (error) {
       console.error('메시지 삭제 오류:', error);
     }
